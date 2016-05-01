@@ -8,4 +8,13 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.readings.any? %>
+      <h3>Readings (<%= @user.readings.count %>)</h3>
+      <ol class="readings">
+        <%= render @readings %>
+      </ol>
+      <%= will_paginate @readings %>
+    <% end %>
+  </div>
 </div>

@@ -1,5 +1,22 @@
 <% provide(:title, "Home") %>
 
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="reading_form">
+        <%= render 'shared/reading_form' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Reading Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://www.chronicart.com/wp-content/uploads/2016/01/bibli.jpg');">
   <div class="banner-content">
     <h1>Welcome to Books</h1>
@@ -8,3 +25,4 @@
   </div>
 </div>
 
+<% end %>

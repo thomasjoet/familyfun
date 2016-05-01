@@ -1,0 +1,49 @@
+<!-- à revoir -->
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <input type="text" id="book-title" class="form-control">
+      <div id="results">
+      </div>
+    </div>
+  </div>
+
+<!-- Lors du click sur un résultat de recherche, ce formulaire (caché) est remplis puis il est soumis
+     vers l'action create de la ressource offer. -->
+<%= form_for(@book, url: reading_path) do |f| %>
+  <%= f.text_field :title, class: "hidden" %>
+  <%= f.text_field :subtitle, class: "hidden" %>
+  <%= f.text_field :description, class: "hidden" %>
+  <%= f.text_field :author, class: "hidden" %>
+  <%= f.text_field :category, class: 'hidden' %>
+<% end %>
+
+
+<div class= "text-center col-xs-6 col-md-offset-3" >
+  <%= simple_form_for @book, :url => book_offer_path do |f| %>
+    <%= f.input :select_category, collection: %w(business ux), selected: "développement", label: "Choose a category" %>
+  <% end %>
+</div>
+
+<%= form_for(@reading) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    <%= f.text_area :grade, placeholder: "Grade this book" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_area :comment, placeholder: "Did you like this book?" %>
+  </div>
+
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
+
+
+
+<%= content_for :after_js do %>
+  <%= javascript_tag do %>
+    global_google_api_key = "<%= ENV["GOOGLE_API_KEY"] %>";
+    $( function(){ $('#book-title').on('keyup', search_book);} );
+  <% end %>
+<% end %>
+

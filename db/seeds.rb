@@ -14,4 +14,6 @@ User.create(name:  "Tom",
              activated: true,
              activated_at: Time.zone.now)
 
+Book.create(title: "test", author: "test", description: "test", category: "test")
+
 end

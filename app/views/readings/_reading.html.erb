@@ -1,0 +1,16 @@
+<ol class="readings">
+  <%= render @readings %>
+</ol>
+
+<li id="reading-<%= reading.id %>">
+  <%= link_to gravatar_for(reading.user, size: 50), reading.user %>
+  <span class="user"><%= link_to reading.user.name, reading.user %></span>
+  <span class="content"><%= reading.comment %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(reading.created_at) %> ago.
+    <% if current_user?(reading.user) %>
+      <%= link_to "delete", reading, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>
